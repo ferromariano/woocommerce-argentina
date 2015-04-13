@@ -1,12 +1,12 @@
 <?php 
 /*
 Plugin Name: WooCommerce Argentina
-Plugin URI: http://www.globalset.com.ar/plugins
+Plugin URI: http://www.marianoferro.com.ar/plugins
 Description: Agrega provincias argentinas y $ Peso Argentino ( ARS )
-Version: 1.0
+Version: 1.1
 License: CC BY 2.5
 Author: Mariano Ferro
-Author URI: http://www.globalset.com.ar/
+Author URI: http://www.marianoferro.com.ar/
 */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
