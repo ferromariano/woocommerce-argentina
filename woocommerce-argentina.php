@@ -11,8 +11,6 @@ Author URI: http://www.globalset.com.ar/
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-if ( ! class_exists( 'sk_Woocommerce' ) ) {
-
 	class woocommerceArgentina {
 		private static $intancia;
 
@@ -25,23 +23,33 @@ if ( ! class_exists( 'sk_Woocommerce' ) ) {
 		}
 
 		public function config() {
+			add_filter( 'woocommerce_countries',       array( $this, 'add_pais')           );
 			add_filter( 'woocommerce_states',          array( $this, 'add_provincias')           );
 			add_filter( 'woocommerce_currencies',      array( $this, 'add_moneda')               );
 			add_filter( 'woocommerce_currency_symbol', array( $this, 'add_moneda_simbolo'), 10, 2);
+		}
+		
+		public function add_pais( $country ) {
+			if( !isset($country['AR']) ) $country['AR'] = 'Argentina';
+			return $country;
 		}
 
 		public function add_provincias($states) {
 			$states['AR'] = array(
 				'AR-CF'	=> 'Capital Federal',	
+				'AR-B'	=> 'Buenos Aires',	
 				'AR-K'	=> 'Catamarca',	
 				'AR-H'	=> 'Chaco',	
 				'AR-U'	=> 'Chubut',	
 				'AR-X'	=> 'Córdoba',	
+				'AR-X-cap'	=> 'Córdoba ( Capital )',	
 				'AR-W'	=> 'Corrientes',	
 				'AR-E'	=> 'Entre Ríos',	
+				'AR-E-cap'	=> 'Entre Ríos ( Parana ) ',	
 				'AR-P'	=> 'Formosa',	
 				'AR-Y'	=> 'Jujuy',	
 				'AR-L'	=> 'La Pampa',	
+				'AR-L-cap'	=> 'La Pampa ( Santa Rosa ) ',	
 				'AR-F'	=> 'La Rioja',	
 				'AR-M'	=> 'Mendoza',
 				'AR-N'	=> 'Misiones',	
@@ -52,17 +60,10 @@ if ( ! class_exists( 'sk_Woocommerce' ) ) {
 				'AR-D'	=> 'San Luis',
 				'AR-Z'  => 'Santa Cruz',
 				'AR-S'  => 'Santa Fe',
+				'AR-S-cap'  => 'Santa Fe ( Capital y Rosario )',
 				'AR-G'  => 'Santiago del Estero',
 				'AR-V'  => 'Tierra del Fuego, Antártida e Islas del Atlántico Sur',
 				'AR-T'  => 'Tucumán',
-	/*
-				'AR-B'	=> 'Buenos Aires',	
-
-				'AR-X-cap'	=> 'Córdoba ( Capital )',	
-				'AR-E-cap'	=> 'Entre Ríos ( Parana ) ',	
-				'AR-S-cap'  => 'Santa Fe ( Capital y Rosario )',
-				'AR-L-cap'	=> 'La Pampa ( Santa Rosa ) ',	
-	/**/
 
 			);
 			return $states;		
@@ -83,8 +84,6 @@ if ( ! class_exists( 'sk_Woocommerce' ) ) {
 	}
 
 	woocommerceArgentina::init();
-
-}
 
 
 
